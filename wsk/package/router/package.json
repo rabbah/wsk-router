@@ -1,0 +1,10 @@
+{
+  "name": "whisk-router",
+  "description": "Actions to manage reverse proxy for OpenWhis web actions.",
+  "repository": "https://github.com/rabbah/wsk-router",
+  "license": "Apache-2.0",
+  "main": "router.js",
+  "dependencies" : {
+    "cf-nodejs-client": "0.13.0"
+  }
+}

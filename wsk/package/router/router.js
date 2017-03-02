@@ -50,6 +50,7 @@ function login({endpoint, username, password}) {
             UsersUAA.setEndPoint(result.authorization_endpoint)
             return UsersUAA.login(username, password)
         })
+        .then(token => ({ endpoint: endpoint, token: token }))
     }
 }
 

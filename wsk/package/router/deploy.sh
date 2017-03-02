@@ -16,7 +16,7 @@ function deploy() {
 
     npm install
     zip -q -r action.zip router.js package.json node_modules
-    $WSK package update "${PREFIX}" -P secrets
+    $WSK package update "${PREFIX}" -P secrets $@
     $WSK action update "${PREFIX}/list"  action.zip --kind nodejs:6 --main list    
     $WSK action update "${PREFIX}/map"   action.zip --kind nodejs:6 --main map
     $WSK action update "${PREFIX}/unmap" action.zip --kind nodejs:6 --main unmap
@@ -28,7 +28,7 @@ function login() {
     zip -q -r action.zip router.js package.json node_modules
     $WSK package update "${PREFIX}"
     $WSK action update "${PREFIX}/login" action.zip --kind nodejs:6 --main login
-    $WSK action invoke "${PREFIX}/login" -br -p endpoint $1 -p username $2 -p password $3
+    $WSK action invoke "${PREFIX}/login" -br -p username $1 -p password $2 -p endpoint ${3-'https://api.ng.bluemix.net'}
     $WSK action delete "${PREFIX}/login"
 }
 
@@ -41,12 +41,13 @@ function teardown() {
 }
 
 function usage() {
-    echo "Usage $0 [--deploy, --teardown, --login <endpoint> <username> <password>]"
+    echo "Usage $0 [--deploy, --teardown, --login <username> <password> <endpoint>? ]"
 }
 
 case "$1" in
 -d | --deploy )
-deploy
+shift
+deploy $@
 ;;
 -t | --teardown )
 teardown

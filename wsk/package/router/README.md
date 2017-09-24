@@ -11,7 +11,7 @@ The router management is done via an OpenWhisk [action](router.js). There are th
 You will need to bind a valid CF access token to the package to allow the actions to use the CF API. The deployment script assumes a file called `secrets` exists in this directory containing configuration parameters as well as the access token. A template is provided in [secrets.sample](secrets.sample). You may already have such a token in `$HOME/.cf/config.json`. If not, you can
 run an action to retrieve one (or perform a `cf login` and inspect the file `$HOME/.cf/config.json`). To use the `login` action provided:
 ```bash
-$ ./deploy --login <username> <password> <endpoint>
+$ ./deploy.sh --login <username> <password> <endpoint>
 ```
 
 For Bluemix, the `endpoint` is `https://api.ng.bluemix.net`. This is the default value if you do not specify an `endpoint`.
